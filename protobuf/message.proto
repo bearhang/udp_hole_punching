@@ -1,0 +1,8 @@
+syntax = "proto3";
+package message;
+message StartReq {
+required string local_ip = 1;
+required uint16 local_port = 2;
+required string remote_ip = 3;
+required uint16 remote_port = 4;
+}
