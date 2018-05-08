@@ -46,11 +46,10 @@ int main()
 
     string output;
     req.SerializeToString(&output);
-    cout << output << endl;
 
     StartReq rsp;
     rsp.ParseFromString(output);
-    cout << rsp << endl;
+    cout << rsp.local_ip() << endl;
     // while (1)
     // {
     //     sleep(1);
