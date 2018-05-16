@@ -58,8 +58,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::message::StartReq, remote_ip_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::message::StartReq, remote_port_),
   0,
-  2,
   1,
+  2,
   3,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -92,8 +92,8 @@ void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\rmessage.proto\022\007message\"X\n\010StartReq\022\020\n\010"
-      "local_ip\030\001 \002(\t\022\022\n\nlocal_port\030\002 \002(\r\022\021\n\tre"
-      "mote_ip\030\003 \002(\t\022\023\n\013remote_port\030\004 \002(\r"
+      "local_ip\030\001 \002(\r\022\022\n\nlocal_port\030\002 \002(\r\022\021\n\tre"
+      "mote_ip\030\003 \002(\r\022\023\n\013remote_port\030\004 \002(\r"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
       descriptor, 114);
@@ -137,26 +137,16 @@ StartReq::StartReq(const StartReq& from)
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  local_ip_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_local_ip()) {
-    local_ip_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.local_ip_);
-  }
-  remote_ip_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_remote_ip()) {
-    remote_ip_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.remote_ip_);
-  }
-  ::memcpy(&local_port_, &from.local_port_,
+  ::memcpy(&local_ip_, &from.local_ip_,
     static_cast<size_t>(reinterpret_cast<char*>(&remote_port_) -
-    reinterpret_cast<char*>(&local_port_)) + sizeof(remote_port_));
+    reinterpret_cast<char*>(&local_ip_)) + sizeof(remote_port_));
   // @@protoc_insertion_point(copy_constructor:message.StartReq)
 }
 
 void StartReq::SharedCtor() {
-  local_ip_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  remote_ip_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&local_port_, 0, static_cast<size_t>(
+  ::memset(&local_ip_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&remote_port_) -
-      reinterpret_cast<char*>(&local_port_)) + sizeof(remote_port_));
+      reinterpret_cast<char*>(&local_ip_)) + sizeof(remote_port_));
 }
 
 StartReq::~StartReq() {
@@ -165,8 +155,6 @@ StartReq::~StartReq() {
 }
 
 void StartReq::SharedDtor() {
-  local_ip_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  remote_ip_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void StartReq::SetCachedSize(int size) const {
@@ -190,18 +178,10 @@ void StartReq::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      local_ip_.ClearNonDefaultToEmptyNoArena();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      remote_ip_.ClearNonDefaultToEmptyNoArena();
-    }
-  }
-  if (cached_has_bits & 12u) {
-    ::memset(&local_port_, 0, static_cast<size_t>(
+  if (cached_has_bits & 15u) {
+    ::memset(&local_ip_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&remote_port_) -
-        reinterpret_cast<char*>(&local_port_)) + sizeof(remote_port_));
+        reinterpret_cast<char*>(&local_ip_)) + sizeof(remote_port_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -217,16 +197,14 @@ bool StartReq::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string local_ip = 1;
+      // required uint32 local_ip = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_local_ip()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->local_ip().data(), static_cast<int>(this->local_ip().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "message.StartReq.local_ip");
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+          set_has_local_ip();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &local_ip_)));
         } else {
           goto handle_unusual;
         }
@@ -247,16 +225,14 @@ bool StartReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required string remote_ip = 3;
+      // required uint32 remote_ip = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_remote_ip()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->remote_ip().data(), static_cast<int>(this->remote_ip().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "message.StartReq.remote_ip");
+            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
+          set_has_remote_ip();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &remote_ip_)));
         } else {
           goto handle_unusual;
         }
@@ -304,29 +280,19 @@ void StartReq::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string local_ip = 1;
+  // required uint32 local_ip = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->local_ip().data(), static_cast<int>(this->local_ip().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "message.StartReq.local_ip");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->local_ip(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->local_ip(), output);
   }
 
   // required uint32 local_port = 2;
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->local_port(), output);
   }
 
-  // required string remote_ip = 3;
-  if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->remote_ip().data(), static_cast<int>(this->remote_ip().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "message.StartReq.remote_ip");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->remote_ip(), output);
+  // required uint32 remote_ip = 3;
+  if (cached_has_bits & 0x00000004u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->remote_ip(), output);
   }
 
   // required uint32 remote_port = 4;
@@ -349,31 +315,19 @@ void StartReq::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string local_ip = 1;
+  // required uint32 local_ip = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->local_ip().data(), static_cast<int>(this->local_ip().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "message.StartReq.local_ip");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->local_ip(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->local_ip(), target);
   }
 
   // required uint32 local_port = 2;
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->local_port(), target);
   }
 
-  // required string remote_ip = 3;
-  if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->remote_ip().data(), static_cast<int>(this->remote_ip().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "message.StartReq.remote_ip");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->remote_ip(), target);
+  // required uint32 remote_ip = 3;
+  if (cached_has_bits & 0x00000004u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->remote_ip(), target);
   }
 
   // required uint32 remote_port = 4;
@@ -394,17 +348,10 @@ size_t StartReq::RequiredFieldsByteSizeFallback() const {
   size_t total_size = 0;
 
   if (has_local_ip()) {
-    // required string local_ip = 1;
+    // required uint32 local_ip = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->local_ip());
-  }
-
-  if (has_remote_ip()) {
-    // required string remote_ip = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->remote_ip());
   }
 
   if (has_local_port()) {
@@ -412,6 +359,13 @@ size_t StartReq::RequiredFieldsByteSizeFallback() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->local_port());
+  }
+
+  if (has_remote_ip()) {
+    // required uint32 remote_ip = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->remote_ip());
   }
 
   if (has_remote_port()) {
@@ -433,20 +387,20 @@ size_t StartReq::ByteSizeLong() const {
         _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
-    // required string local_ip = 1;
+    // required uint32 local_ip = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->local_ip());
-
-    // required string remote_ip = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->remote_ip());
 
     // required uint32 local_port = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->local_port());
+
+    // required uint32 remote_ip = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->remote_ip());
 
     // required uint32 remote_port = 4;
     total_size += 1 +
@@ -486,15 +440,13 @@ void StartReq::MergeFrom(const StartReq& from) {
   cached_has_bits = from._has_bits_[0];
   if (cached_has_bits & 15u) {
     if (cached_has_bits & 0x00000001u) {
-      set_has_local_ip();
-      local_ip_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.local_ip_);
+      local_ip_ = from.local_ip_;
     }
     if (cached_has_bits & 0x00000002u) {
-      set_has_remote_ip();
-      remote_ip_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.remote_ip_);
+      local_port_ = from.local_port_;
     }
     if (cached_has_bits & 0x00000004u) {
-      local_port_ = from.local_port_;
+      remote_ip_ = from.remote_ip_;
     }
     if (cached_has_bits & 0x00000008u) {
       remote_port_ = from.remote_port_;
@@ -528,11 +480,9 @@ void StartReq::Swap(StartReq* other) {
 }
 void StartReq::InternalSwap(StartReq* other) {
   using std::swap;
-  local_ip_.Swap(&other->local_ip_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  remote_ip_.Swap(&other->remote_ip_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
+  swap(local_ip_, other->local_ip_);
   swap(local_port_, other->local_port_);
+  swap(remote_ip_, other->remote_ip_);
   swap(remote_port_, other->remote_port_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);

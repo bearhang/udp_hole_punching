@@ -15,8 +15,7 @@ using namespace message;
 #define LOCAL_PORT 9204
 
 struct peer_info {
-    string ip;
-    string port;
+    struct sockaddr_in addr;
 };
 
 struct peers_manager {
@@ -57,34 +56,48 @@ int main()
     while (manager.peer_count < 2)
     {
         struct sockaddr_in remote_addr = {0};
+        socklen_t socklen = sizeof(remote_addr);
         char buf[1024] = {0};
 
-        err = recvfrom(buf, 1024, 0, (struct sockaddr *)&local_addr, (socklen_t)sizeof(local_addr));
+        err = recvfrom(fd, buf, 1024, 0, (struct sockaddr *)&remote_addr, &socklen);
         if (err < 0)
         {
             printf("recvfrom %d %s\n", errno, strerror(errno));
             return -1;
         }
 
-        printf("recv msg:%s\n", buf);
+        printf("recv msg:%s from:%s:%d\n", buf, inet_ntoa(remote_addr.sin_addr), ntohs(remote_addr.sin_port));
+        memcpy(&manager.peers[manager.peer_count].addr, &remote_addr, socklen);
+        manager.peer_count++;
     }
 
     StartReq req;
-    req.set_local_ip("127.0.0.1");
-    req.set_remote_ip("127.0.0.2");
-    req.set_local_port(10);
-    req.set_remote_port(20);
-
     string output;
+    req.set_local_ip(manager.peers[0].addr.sin_addr.s_addr);
+    req.set_remote_ip(manager.peers[1].addr.sin_addr.s_addr);
+    req.set_local_port(manager.peers[0].addr.sin_port);
+    req.set_remote_port(manager.peers[1].addr.sin_port);
     req.SerializeToString(&output);
+    
+    err = sendto(fd, output.c_str(), output.size(), 0, (struct sockaddr *)&manager.peers[0].addr, (socklen_t)sizeof(manager.peers[0].addr));
+    if (err < 0)
+    {
+        printf("connect %d %s\n", errno, strerror(errno));
+        return -1;
+    }
 
-    StartReq rsp;
-    rsp.ParseFromString(output);
-    cout << rsp.local_ip() << endl;
-    // while (1)
-    // {
-    //     sleep(1);
-    // }
+    req.set_local_ip(manager.peers[1].addr.sin_addr.s_addr);
+    req.set_remote_ip(manager.peers[0].addr.sin_addr.s_addr);
+    req.set_local_port(manager.peers[1].addr.sin_port);
+    req.set_remote_port(manager.peers[0].addr.sin_port);
+    req.SerializeToString(&output);
+    
+    err = sendto(fd, output.c_str(), output.size(), 0, (struct sockaddr *)&manager.peers[1].addr, (socklen_t)sizeof(manager.peers[1].addr));
+    if (err < 0)
+    {
+        printf("connect %d %s\n", errno, strerror(errno));
+        return -1;
+    }
 
     return 0;
 }

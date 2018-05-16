@@ -153,35 +153,12 @@ class StartReq : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // accessors -------------------------------------------------------
 
-  // required string local_ip = 1;
+  // required uint32 local_ip = 1;
   bool has_local_ip() const;
   void clear_local_ip();
   static const int kLocalIpFieldNumber = 1;
-  const ::std::string& local_ip() const;
-  void set_local_ip(const ::std::string& value);
-  #if LANG_CXX11
-  void set_local_ip(::std::string&& value);
-  #endif
-  void set_local_ip(const char* value);
-  void set_local_ip(const char* value, size_t size);
-  ::std::string* mutable_local_ip();
-  ::std::string* release_local_ip();
-  void set_allocated_local_ip(::std::string* local_ip);
-
-  // required string remote_ip = 3;
-  bool has_remote_ip() const;
-  void clear_remote_ip();
-  static const int kRemoteIpFieldNumber = 3;
-  const ::std::string& remote_ip() const;
-  void set_remote_ip(const ::std::string& value);
-  #if LANG_CXX11
-  void set_remote_ip(::std::string&& value);
-  #endif
-  void set_remote_ip(const char* value);
-  void set_remote_ip(const char* value, size_t size);
-  ::std::string* mutable_remote_ip();
-  ::std::string* release_remote_ip();
-  void set_allocated_remote_ip(::std::string* remote_ip);
+  ::google::protobuf::uint32 local_ip() const;
+  void set_local_ip(::google::protobuf::uint32 value);
 
   // required uint32 local_port = 2;
   bool has_local_port() const;
@@ -189,6 +166,13 @@ class StartReq : public ::google::protobuf::Message /* @@protoc_insertion_point(
   static const int kLocalPortFieldNumber = 2;
   ::google::protobuf::uint32 local_port() const;
   void set_local_port(::google::protobuf::uint32 value);
+
+  // required uint32 remote_ip = 3;
+  bool has_remote_ip() const;
+  void clear_remote_ip();
+  static const int kRemoteIpFieldNumber = 3;
+  ::google::protobuf::uint32 remote_ip() const;
+  void set_remote_ip(::google::protobuf::uint32 value);
 
   // required uint32 remote_port = 4;
   bool has_remote_port() const;
@@ -214,9 +198,9 @@ class StartReq : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr local_ip_;
-  ::google::protobuf::internal::ArenaStringPtr remote_ip_;
+  ::google::protobuf::uint32 local_ip_;
   ::google::protobuf::uint32 local_port_;
+  ::google::protobuf::uint32 remote_ip_;
   ::google::protobuf::uint32 remote_port_;
   friend struct ::protobuf_message_2eproto::TableStruct;
 };
@@ -231,7 +215,7 @@ class StartReq : public ::google::protobuf::Message /* @@protoc_insertion_point(
 #endif  // __GNUC__
 // StartReq
 
-// required string local_ip = 1;
+// required uint32 local_ip = 1;
 inline bool StartReq::has_local_ip() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -242,70 +226,28 @@ inline void StartReq::clear_has_local_ip() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void StartReq::clear_local_ip() {
-  local_ip_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  local_ip_ = 0u;
   clear_has_local_ip();
 }
-inline const ::std::string& StartReq::local_ip() const {
+inline ::google::protobuf::uint32 StartReq::local_ip() const {
   // @@protoc_insertion_point(field_get:message.StartReq.local_ip)
-  return local_ip_.GetNoArena();
+  return local_ip_;
 }
-inline void StartReq::set_local_ip(const ::std::string& value) {
+inline void StartReq::set_local_ip(::google::protobuf::uint32 value) {
   set_has_local_ip();
-  local_ip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  local_ip_ = value;
   // @@protoc_insertion_point(field_set:message.StartReq.local_ip)
-}
-#if LANG_CXX11
-inline void StartReq::set_local_ip(::std::string&& value) {
-  set_has_local_ip();
-  local_ip_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:message.StartReq.local_ip)
-}
-#endif
-inline void StartReq::set_local_ip(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_local_ip();
-  local_ip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:message.StartReq.local_ip)
-}
-inline void StartReq::set_local_ip(const char* value, size_t size) {
-  set_has_local_ip();
-  local_ip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:message.StartReq.local_ip)
-}
-inline ::std::string* StartReq::mutable_local_ip() {
-  set_has_local_ip();
-  // @@protoc_insertion_point(field_mutable:message.StartReq.local_ip)
-  return local_ip_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* StartReq::release_local_ip() {
-  // @@protoc_insertion_point(field_release:message.StartReq.local_ip)
-  if (!has_local_ip()) {
-    return NULL;
-  }
-  clear_has_local_ip();
-  return local_ip_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void StartReq::set_allocated_local_ip(::std::string* local_ip) {
-  if (local_ip != NULL) {
-    set_has_local_ip();
-  } else {
-    clear_has_local_ip();
-  }
-  local_ip_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), local_ip);
-  // @@protoc_insertion_point(field_set_allocated:message.StartReq.local_ip)
 }
 
 // required uint32 local_port = 2;
 inline bool StartReq::has_local_port() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void StartReq::set_has_local_port() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void StartReq::clear_has_local_port() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void StartReq::clear_local_port() {
   local_port_ = 0u;
@@ -321,70 +263,28 @@ inline void StartReq::set_local_port(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:message.StartReq.local_port)
 }
 
-// required string remote_ip = 3;
+// required uint32 remote_ip = 3;
 inline bool StartReq::has_remote_ip() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void StartReq::set_has_remote_ip() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void StartReq::clear_has_remote_ip() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void StartReq::clear_remote_ip() {
-  remote_ip_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  remote_ip_ = 0u;
   clear_has_remote_ip();
 }
-inline const ::std::string& StartReq::remote_ip() const {
+inline ::google::protobuf::uint32 StartReq::remote_ip() const {
   // @@protoc_insertion_point(field_get:message.StartReq.remote_ip)
-  return remote_ip_.GetNoArena();
+  return remote_ip_;
 }
-inline void StartReq::set_remote_ip(const ::std::string& value) {
+inline void StartReq::set_remote_ip(::google::protobuf::uint32 value) {
   set_has_remote_ip();
-  remote_ip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  remote_ip_ = value;
   // @@protoc_insertion_point(field_set:message.StartReq.remote_ip)
-}
-#if LANG_CXX11
-inline void StartReq::set_remote_ip(::std::string&& value) {
-  set_has_remote_ip();
-  remote_ip_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:message.StartReq.remote_ip)
-}
-#endif
-inline void StartReq::set_remote_ip(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_remote_ip();
-  remote_ip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:message.StartReq.remote_ip)
-}
-inline void StartReq::set_remote_ip(const char* value, size_t size) {
-  set_has_remote_ip();
-  remote_ip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:message.StartReq.remote_ip)
-}
-inline ::std::string* StartReq::mutable_remote_ip() {
-  set_has_remote_ip();
-  // @@protoc_insertion_point(field_mutable:message.StartReq.remote_ip)
-  return remote_ip_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* StartReq::release_remote_ip() {
-  // @@protoc_insertion_point(field_release:message.StartReq.remote_ip)
-  if (!has_remote_ip()) {
-    return NULL;
-  }
-  clear_has_remote_ip();
-  return remote_ip_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void StartReq::set_allocated_remote_ip(::std::string* remote_ip) {
-  if (remote_ip != NULL) {
-    set_has_remote_ip();
-  } else {
-    clear_has_remote_ip();
-  }
-  remote_ip_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), remote_ip);
-  // @@protoc_insertion_point(field_set_allocated:message.StartReq.remote_ip)
 }
 
 // required uint32 remote_port = 4;

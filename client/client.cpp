@@ -12,7 +12,8 @@
 using namespace std;
 using namespace message;
 
-#define REMOTE_IP "10.123.25.11"
+// #define REMOTE_IP "10.123.25.11"
+#define REMOTE_IP "10.104.53.46"
 #define REMOTE_PORT 9204
 
 #define REGISTER "register"
@@ -22,10 +23,10 @@ void handle_puching(char *buf)
     StartReq req;
     req.ParseFromString(buf);
 
-    cout << req.local_ip << endl;
-    cout << req.local_port << endl;
-    cout << req.remote_ip << endl;
-    cout << req.remote_port << endl;
+    cout << req.local_ip() << endl;
+    cout << req.local_port() << endl;
+    cout << req.remote_ip() << endl;
+    cout << req.remote_port() << endl;
 
     return;
 }
@@ -46,8 +47,8 @@ int main()
     }
 
     remote_addr.sin_family = AF_INET;
-    remote_addr.sin_addr.s_addr = inet_addr(LOCAL_IP);
-    remote_addr.sin_port = htons(LOCAL_PORT);
+    remote_addr.sin_addr.s_addr = inet_addr(REMOTE_IP);
+    remote_addr.sin_port = htons(REMOTE_PORT);
     err = sendto(fd, REGISTER, sizeof(REGISTER), 0, (struct sockaddr *)&remote_addr, (socklen_t)sizeof(remote_addr));
     if (err < 0)
     {
