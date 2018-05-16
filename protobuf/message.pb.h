@@ -181,6 +181,13 @@ class StartReq : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::google::protobuf::uint32 remote_port() const;
   void set_remote_port(::google::protobuf::uint32 value);
 
+  // optional int32 fd = 10;
+  bool has_fd() const;
+  void clear_fd();
+  static const int kFdFieldNumber = 10;
+  ::google::protobuf::int32 fd() const;
+  void set_fd(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:message.StartReq)
  private:
   void set_has_local_ip();
@@ -191,6 +198,8 @@ class StartReq : public ::google::protobuf::Message /* @@protoc_insertion_point(
   void clear_has_remote_ip();
   void set_has_remote_port();
   void clear_has_remote_port();
+  void set_has_fd();
+  void clear_has_fd();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -202,6 +211,7 @@ class StartReq : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::google::protobuf::uint32 local_port_;
   ::google::protobuf::uint32 remote_ip_;
   ::google::protobuf::uint32 remote_port_;
+  ::google::protobuf::int32 fd_;
   friend struct ::protobuf_message_2eproto::TableStruct;
 };
 // ===================================================================
@@ -309,6 +319,30 @@ inline void StartReq::set_remote_port(::google::protobuf::uint32 value) {
   set_has_remote_port();
   remote_port_ = value;
   // @@protoc_insertion_point(field_set:message.StartReq.remote_port)
+}
+
+// optional int32 fd = 10;
+inline bool StartReq::has_fd() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void StartReq::set_has_fd() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void StartReq::clear_has_fd() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void StartReq::clear_fd() {
+  fd_ = 0;
+  clear_has_fd();
+}
+inline ::google::protobuf::int32 StartReq::fd() const {
+  // @@protoc_insertion_point(field_get:message.StartReq.fd)
+  return fd_;
+}
+inline void StartReq::set_fd(::google::protobuf::int32 value) {
+  set_has_fd();
+  fd_ = value;
+  // @@protoc_insertion_point(field_set:message.StartReq.fd)
 }
 
 #ifdef __GNUC__

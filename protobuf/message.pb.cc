@@ -57,13 +57,15 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::message::StartReq, local_port_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::message::StartReq, remote_ip_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::message::StartReq, remote_port_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::message::StartReq, fd_),
   0,
   1,
   2,
   3,
+  4,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 9, sizeof(::message::StartReq)},
+  { 0, 10, sizeof(::message::StartReq)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -91,12 +93,13 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\rmessage.proto\022\007message\"X\n\010StartReq\022\020\n\010"
+      "\n\rmessage.proto\022\007message\"d\n\010StartReq\022\020\n\010"
       "local_ip\030\001 \002(\r\022\022\n\nlocal_port\030\002 \002(\r\022\021\n\tre"
-      "mote_ip\030\003 \002(\r\022\023\n\013remote_port\030\004 \002(\r"
+      "mote_ip\030\003 \002(\r\022\023\n\013remote_port\030\004 \002(\r\022\n\n\002fd"
+      "\030\n \001(\005"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 114);
+      descriptor, 126);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "message.proto", &protobuf_RegisterTypes);
 }
@@ -123,6 +126,7 @@ const int StartReq::kLocalIpFieldNumber;
 const int StartReq::kLocalPortFieldNumber;
 const int StartReq::kRemoteIpFieldNumber;
 const int StartReq::kRemotePortFieldNumber;
+const int StartReq::kFdFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 StartReq::StartReq()
@@ -138,15 +142,15 @@ StartReq::StartReq(const StartReq& from)
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&local_ip_, &from.local_ip_,
-    static_cast<size_t>(reinterpret_cast<char*>(&remote_port_) -
-    reinterpret_cast<char*>(&local_ip_)) + sizeof(remote_port_));
+    static_cast<size_t>(reinterpret_cast<char*>(&fd_) -
+    reinterpret_cast<char*>(&local_ip_)) + sizeof(fd_));
   // @@protoc_insertion_point(copy_constructor:message.StartReq)
 }
 
 void StartReq::SharedCtor() {
   ::memset(&local_ip_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&remote_port_) -
-      reinterpret_cast<char*>(&local_ip_)) + sizeof(remote_port_));
+      reinterpret_cast<char*>(&fd_) -
+      reinterpret_cast<char*>(&local_ip_)) + sizeof(fd_));
 }
 
 StartReq::~StartReq() {
@@ -178,10 +182,10 @@ void StartReq::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 15u) {
+  if (cached_has_bits & 31u) {
     ::memset(&local_ip_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&remote_port_) -
-        reinterpret_cast<char*>(&local_ip_)) + sizeof(remote_port_));
+        reinterpret_cast<char*>(&fd_) -
+        reinterpret_cast<char*>(&local_ip_)) + sizeof(fd_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -253,6 +257,20 @@ bool StartReq::MergePartialFromCodedStream(
         break;
       }
 
+      // optional int32 fd = 10;
+      case 10: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(80u /* 80 & 0xFF */)) {
+          set_has_fd();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &fd_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -300,6 +318,11 @@ void StartReq::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->remote_port(), output);
   }
 
+  // optional int32 fd = 10;
+  if (cached_has_bits & 0x00000010u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(10, this->fd(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -333,6 +356,11 @@ void StartReq::SerializeWithCachedSizes(
   // required uint32 remote_port = 4;
   if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->remote_port(), target);
+  }
+
+  // optional int32 fd = 10;
+  if (cached_has_bits & 0x00000010u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(10, this->fd(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -410,6 +438,13 @@ size_t StartReq::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
+  // optional int32 fd = 10;
+  if (has_fd()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->fd());
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -438,7 +473,7 @@ void StartReq::MergeFrom(const StartReq& from) {
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 15u) {
+  if (cached_has_bits & 31u) {
     if (cached_has_bits & 0x00000001u) {
       local_ip_ = from.local_ip_;
     }
@@ -450,6 +485,9 @@ void StartReq::MergeFrom(const StartReq& from) {
     }
     if (cached_has_bits & 0x00000008u) {
       remote_port_ = from.remote_port_;
+    }
+    if (cached_has_bits & 0x00000010u) {
+      fd_ = from.fd_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -484,6 +522,7 @@ void StartReq::InternalSwap(StartReq* other) {
   swap(local_port_, other->local_port_);
   swap(remote_ip_, other->remote_ip_);
   swap(remote_port_, other->remote_port_);
+  swap(fd_, other->fd_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }

@@ -5,4 +5,6 @@ message StartReq {
     required uint32 local_port = 2;
     required uint32 remote_ip = 3;
     required uint32 remote_port = 4;
+
+    optional int32 fd = 10;
 }
